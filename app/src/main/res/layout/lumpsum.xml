@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/textViewCardItemHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ic_info_black_24dp"
+            android:text="Lumpsum" />
+
+
+        <com.traveller.enthusiastic.appUtill.SeekBarWithIntervals
+            android:id="@+id/seekbarWithIntervals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+<!--
+            android:thumbTint="@color/green_300" />
+-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            style="@style/editTextBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="number"
+            android:id="@+id/lumpsum_invst_et"
+            android:maxWidth="50dp"
+            android:minWidth="50dp"
+            android:paddingTop="15dp"
+            android:text="12" />
+
+        <TextView
+            style="@style/textViewCardItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Thousand" />
+    </LinearLayout>
+
+
+</LinearLayout>

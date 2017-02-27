@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_100"
+    >
+
+    <RelativeLayout
+        android:id="@+id/linAnnouncementContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+    <android.support.v4.view.ViewPager
+        android:layout_margin="16dp"
+        android:id="@+id/vp_projection"
+        style="@style/styleDashboardWidgetParentLayout"
+        android:background="@drawable/border_shadow"
+        android:layout_height="0dp"
+        android:visibility="visible" />
+
+    <com.traveller.enthusiastic.appUtill.CirclePageIndicator
+        android:id="@+id/viewpagerAnnouncementIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vp_projection"
+        android:layout_centerHorizontal="true" />
+
+    <!--<TextView-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:id="@+id/tempTextview"-->
+        <!--android:text="dsffdsf"-->
+        <!--android:visibility="visible" />-->
+    </RelativeLayout>
+
+</LinearLayout>

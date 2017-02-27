@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_marginTop="30dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        style="@style/textViewCardItem"
+        android:id="@+id/whats_this"
+        android:text="Whats's this?"
+        android:layout_gravity="top|right"
+        android:textColor="@color/orange_300"
+        />
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        >
+        <TextView
+            android:id="@+id/projected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:text="Projected Amount"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/projected_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_below="@id/projected"
+            android:text="90909090"
+            android:textColor="@color/blue_800"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/proj_ll"
+            android:layout_below="@id/projected_amount"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textViewCardItem"
+                    android:gravity="center"
+                    android:text="Total Investments"
+                    />
+                <TextView
+                    style="@style/textViewCardItem"
+                    android:gravity="center"
+                    android:id="@+id/totalInvestments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="989898"
+                    />
+
+            </LinearLayout>
+            <View
+                style="@style/horizantle_divider"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Good Case"
+                    style="@style/textViewCardItem"
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="989898"
+                    android:id="@+id/goodCase"
+                    style="@style/textViewCardItem"
+
+                    />
+            </LinearLayout>
+            <View
+                style="@style/horizantle_divider"
+                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bad Case"
+                    style="@style/textViewCardItem"
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="989898"
+                    android:id="@+id/badCase"
+                    style="@style/textViewCardItem"
+
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        app:srcCompat="@drawable/more_dots"
+        />
+
+
+
+
+
+
+
+</FrameLayout>

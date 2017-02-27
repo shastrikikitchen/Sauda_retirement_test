@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        style="@style/textViewCardItemHeader"
+        android:drawableRight="@drawable/ic_info_black_24dp"
+        android:text="Risk"
+        android:drawablePadding="10dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        >
+
+        <Button
+            android:id="@+id/low_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/ButtonViewCardItem"
+            android:layout_height="wrap_content"
+            android:text="Low Risk"
+            android:background="@drawable/green_gradient_background"
+            android:layout_marginRight="10dp"
+            />
+        <Button
+            android:id="@+id/mod_btn"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/ButtonViewCardItem"
+            android:background="@drawable/white_background"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:text="Moderate Risk"
+            />
+        <Button
+            android:id="@+id/high_btn"
+            style="@style/ButtonViewCardItem"
+            android:layout_width="0dp"
+            android:background="@drawable/white_background"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="High Risk"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            style="@style/textViewCardItem"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50% \nequity"
+            />
+    <SeekBar
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:id="@+id/seek_bar"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="0"
+        android:thumbTint="@color/green_300"
+       android:progressDrawable="@drawable/progress"
+        />
+        <TextView
+            style="@style/textViewCardItem"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50% \ndebt"
+            />
+    </LinearLayout>
+
+</LinearLayout>

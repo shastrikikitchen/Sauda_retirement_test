@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">GoalWise</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rupee_symbol">"\u20B9"</string>
+    <string name="know_more">ant to know how much you \n should save ? Use this <!--<a href="https://www.goalwise.com/" target="_top">Retirement Tool</a>--></string>
+
+    <string name="retirement_tool">&lt;a href=https://www.goalwise.com/&gt;Retirement Goal &lt;/a&gt;</string>
+
+    <!--
+        <string name="know_more">Want to know how much you \n should save ? Use this </string>
+    -->
+    <!--
+    <string name="retirement_tool"><a> href="https://www.goalwise.com/on > Retirment Tool</a></string>
+-->
+    <string name="nav_tab">nav_tab</string>
+    <string-array name="categories">
+        <item>OVERVIEW</item>
+        <item>FUNDS</item>
+    </string-array>
+</resources>

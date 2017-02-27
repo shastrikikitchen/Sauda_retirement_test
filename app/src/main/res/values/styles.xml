@@ -1,0 +1,111 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
+
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+    <style name="MyActionBar" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <!--
+                <item name="android:background">@drawable/status_bar_pallete</item>
+        -->
+        <item name="android:itemTextAppearance">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <!-- Support library compatibility -->
+        <!--
+                <item name="background">@drawable/status_bar_pallete</item>
+        -->
+    </style>
+    <style name="MySeekBarTheme" parent="Widget.AppCompat.SeekBar" >
+        <item name="colorAccent">#ffff00</item>
+    </style>
+    <style name="styleDashboardWidgetParentLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+
+    </style>
+
+    <style name="styleDashboardWidgetLayout" parent="styleDashboardWidgetParentLayout">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+
+    </style>
+    <style name="textViewCardItem">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grey_500</item>
+        <item name="android:fontFamily">sans-serif</item>
+
+
+    </style>
+    <style name="stylePrimaryButton">
+        <item name="colorButtonNormal">#7E57C2</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:background">#7E57C2</item>
+    </style>
+    <style name="styleSecondaryButton"><!-- take care of textAppearance while updating text style-->
+        <item name="colorButtonNormal">@color/white</item>
+        <item name="android:textColor">#7E57C2</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="textViewCardItemHeader">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grey_800</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:gravity">center</item>
+
+
+    </style>
+    <style name="ButtonViewCardItem">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/grey_500</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textAllCaps">false</item>
+
+
+    </style>
+    <style name="horizantle_divider">
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:background">@color/grey_500</item>
+    </style>
+<style name="editTextBackground" parent="Widget.AppCompat.EditText">
+    <item name="android:background">@drawable/form_edit_text_background</item>
+    <item name="android:textSize">15sp</item>
+    <item name="android:padding">10dp</item>
+    <item name="colorControlActivated">@color/blue_300</item>
+    <item name="colorControlHighlight">@color/blue_300</item>
+    <item name="android:textColor">@color/grey_500</item>
+    <item name="android:textCursorDrawable">@drawable/cursor_drawable</item></style>
+    <style name="editTextWithOutBackground" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">15sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="colorControlActivated">@color/blue_300</item>
+        <item name="colorControlHighlight">@color/blue_300</item>
+        <item name="android:textColor">@color/grey_500</item>
+        <item name="android:textCursorDrawable">@drawable/cursor_drawable</item></style>
+
+</resources>
