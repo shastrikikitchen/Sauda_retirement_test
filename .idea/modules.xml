@@ -6,7 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/GoldWise.iml" filepath="$PROJECT_DIR$/GoldWise.iml" />
       <module fileurl="file://$PROJECT_DIR$/NetworkUtils/NetworkUtils.iml" filepath="$PROJECT_DIR$/NetworkUtils/NetworkUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
+      <module fileurl="file://$PROJECT_DIR$/volleylib/volleylib.iml" filepath="$PROJECT_DIR$/volleylib/volleylib.iml" />
     </modules>
   </component>
 </project>
