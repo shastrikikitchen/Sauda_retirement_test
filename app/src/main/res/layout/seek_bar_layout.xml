@@ -59,14 +59,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <TextView
-            style="@style/textViewCardItem"
-            android:layout_gravity="left"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="50% \nequity"
-            />
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="left"
+
+           android:orientation="vertical">
+           <TextView
+               style="@style/textViewCardItem"
+               android:layout_gravity="center"
+               android:gravity="center"
+               android:id="@+id/equity_percentage"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="50%"
+               />
+           <TextView
+               style="@style/textViewCardItem"
+               android:gravity="center"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Equity"
+               />
+
+
+       </LinearLayout>
     <SeekBar
         android:layout_width="0dp"
         android:layout_weight="1"
@@ -77,13 +94,29 @@
         android:thumbTint="@color/green_300"
        android:progressDrawable="@drawable/progress"
         />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
         <TextView
             style="@style/textViewCardItem"
             android:gravity="center"
+            android:id="@+id/debt_percentage"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="50% \ndebt"
+            android:text="50%"
             />
+            <TextView
+                style="@style/textViewCardItem"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Debt"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

@@ -15,16 +15,15 @@ import java.util.Map;
 
 public class GoalWiseAPi extends VolleyRequest<GoalWiseRequest,GoalWiseResponse> {
     public GoalWiseAPi(GoalWiseRequest requestBody, VolleyListener<GoalWiseResponse> listener, Object tag) {
-        //super(Method.POST, "https://ec2-52-220-95-9.ap-southeast-1.compute.amazonaws.com/api/goal-plan", requestBody, GoalWiseResponse.class, listener, tag);
-        super(Method.POST, "http://www.json-generator.com/api/json/get/bPWTzgyJFe?indent=2", requestBody, GoalWiseResponse.class, listener, tag);
+        super(Method.POST, "https://ec2-52-220-95-9.ap-southeast-1.compute.amazonaws.com/api/goal-plan", requestBody, GoalWiseResponse.class, listener, tag);
+       // super(Method.POST, "http://www.json-generator.com/api/json/get/bPWTzgyJFe?indent=2", requestBody, GoalWiseResponse.class, listener, tag);
     }
 
-    @Override
+    /*@Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String,String> header = super.getHeaders();
-        header.put("access_token","YXcxNEFDTU4IAUN.cDUcOQYbZQwsLBgbMwQCYwIwfRomFERrEHU3Dw");
         return header;
-    }
+    }*/
 
     @Override
     public INetworkRequest duplicate() {
@@ -75,6 +74,7 @@ public class GoalWiseAPi extends VolleyRequest<GoalWiseRequest,GoalWiseResponse>
             request.setMonthly_inv(monthly_inv);
             request.setRisk_cat(risk_cat);
             request.setTime_horizon(time_horizon);
+            request.setAccess_token("YXcxNEFDTU4IAUN.cDUcOQYbZQwsLBgbMwQCYwIwfRomFERrEHU3Dw");
             return new GoalWiseAPi(request,listener,tag);
         }
     }

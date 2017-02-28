@@ -9,6 +9,15 @@ public class GoalWiseRequest {
     private  String goal;
     private  int risk_cat;
     private long monthly_inv;
+    private  String access_token;
+
+    public String getAccess_token() {
+        return access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        this.access_token = access_token;
+    }
 
     public int getTime_horizon() {
         return time_horizon;
