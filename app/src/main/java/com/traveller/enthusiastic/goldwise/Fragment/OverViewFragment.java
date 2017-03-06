@@ -19,10 +19,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
@@ -57,11 +60,14 @@ public class OverViewFragment extends BaseFragment implements View.OnClickListen
     View view ;
     private EditText monthly_invst_et;
     private TextView retirementTool;
+    private TextView equity_percentage;
+    private TextView debt_percentage;
     private EditText lumpsum_invst_et;
     private EditText time_horizon;
     private Double monthly_step=0.0;
     private Double lumpsum_step=0.0;
     DecimalFormat ft = new DecimalFormat(".##");
+    private Spinner spinner_days ;
 
 
     @Override
@@ -107,7 +113,10 @@ public class OverViewFragment extends BaseFragment implements View.OnClickListen
     private void parseData(GoalWiseResponse response) {
         setRiskButton(response.getMsg().getRisk_level().intValue());
         montlyInvestment.setProgress(response.getMsg().getMonthly_investment().intValue());
-        time_horizon.setText(response.getMsg().getTime_horizon()+"Hours");
+        time_horizon.setText("1 month");
+        if(response.getMsg().getTime_horizon()<5) {
+            spinner_days.setSelection(response.getMsg().getTime_horizon().intValue());
+        }
 
 
 
@@ -216,6 +225,14 @@ public class OverViewFragment extends BaseFragment implements View.OnClickListen
         return ff.format(number/10000.0);
     }
 
+    String[] getYears(){
+       String[]years = new String[12];
+        for (int i = 0;i<10;i++){
+            years[i]=(i+" Years");
+
+        }
+        return years;
+    }
     private void initViews(View view) {
         this.view = view;
         overView_ll =  (LinearLayout)view.findViewById(R.id.linWidgetContainer);
@@ -227,15 +244,46 @@ public class OverViewFragment extends BaseFragment implements View.OnClickListen
         lumpsum_invst_et = (EditText) view.findViewById(R.id.lumpsum_invst_et);
         time_horizon = (EditText) view.findViewById(R.id.time_horizon);
         retirementTool = (TextView) view.findViewById(R.id.retirementTool);
+        debt_percentage = (TextView) view.findViewById(R.id.debt_percentage);
+        equity_percentage = (TextView) view.findViewById(R.id.equity_percentage);
         seekBarWithIntervals = (SeekBarWithIntervals) view.findViewById(R.id.sbi_lumpSum );
+        spinner_days = (Spinner) view.findViewById(R.id.days_spinner);
         seekBarWithIntervalsLump = (SeekBarWithIntervals) view.findViewById(R.id.seekbarWithIntervals);
         montlyInvestment = seekBarWithIntervals.getSeekbar();
         lumpSumSeek = seekBarWithIntervalsLump.getSeekbar();
         projectionView =  new ProjectionView(getActivity(),overView_ll,getChildFragmentManager());
+
+        setSpinner();
         callAPI();
         setClickListeners();
         setIntervalsData();
         setTextListeners();
+
+
+    }
+
+    private void setSpinner() {
+        spinner_days.setPrompt(String.valueOf(getYears()[0]));
+
+       final  ArrayAdapter<String> daysDataAdapter = new ArrayAdapter<String>(getContext(), R.layout.simple_spinner_item, getResources().getStringArray(R.array.graph_day_filter_array));
+        spinner_days.setAdapter(daysDataAdapter);
+            String days="1 years";
+            int spinnerPosition = daysDataAdapter.getPosition(days);
+        spinner_days.setSelection(spinnerPosition);
+
+        spinner_days.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+           // time_horizon.setText(daysDataAdapter.getItem(position));
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    });
+
 
 
     }
@@ -444,7 +492,13 @@ public class OverViewFragment extends BaseFragment implements View.OnClickListen
                 //seekBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(getContext(),R.color.orange_700), PorterDuff.Mode.SRC_IN);
                 seekBar.getThumb().setColorFilter(ContextCompat.getColor(getContext(), R.color.orange_700), PorterDuff.Mode.SRC_IN);
             }
-        }
+
+
+        int debt = 100 - progress;
+        int equity = 100 -debt;
+            debt_percentage.setText(debt+ "%");
+            equity_percentage.setText((equity)+ "%");
+    }
 
 
     @Override

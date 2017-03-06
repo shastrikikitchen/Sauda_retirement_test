@@ -2,6 +2,8 @@ package com.traveller.enthusiastic.networkUtils.Response;
 
 import com.traveller.enthusiastic.networkUtils.ValueObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by sauda on 25/02/17.
  */
@@ -50,7 +52,7 @@ public class GoalWiseResponse extends ValueObject {
         private Long total_investment;
         private Long time_horizon;
         private Long target;
-        private String funds;
+        private ArrayList<Funds> funds;
 
 private Projection projections;
 
@@ -166,11 +168,11 @@ private Projection projections;
             this.target = target;
         }
 
-        public String getFunds() {
+        public ArrayList<Funds> getFunds() {
             return funds;
         }
 
-        public void setFunds(String funds) {
+        public void setFunds(ArrayList<Funds> funds) {
             this.funds = funds;
         }
 
@@ -182,6 +184,199 @@ private Projection projections;
             this.projections = projections;
         }
     }
+
+    public  static class Funds{
+        private String type;
+        private String sipmultiple;
+        private String sipdateavailable;
+        private String ret7yr;
+        private String ret5yr;
+        private String ret3yr;
+        private String ret1yr;
+        private String ret10yr;
+        private String rating;
+        private String  percentage;
+        private String  minsipmonths;
+        private String minsipamt;
+        private String mininvestmentmultiple;
+        private String  mininitialinvestmentamt;
+        private String minaddoninvestmentamt;
+        private String  link;
+        private String id;
+        private String  gwallowsip;
+        private String  gwallowonetime;
+        private String fundname;
+        private String amount;
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
+        public String getSipmultiple() {
+            return sipmultiple;
+        }
+
+        public void setSipmultiple(String sipmultiple) {
+            this.sipmultiple = sipmultiple;
+        }
+
+        public String getSipdateavailable() {
+            return sipdateavailable;
+        }
+
+        public void setSipdateavailable(String sipdateavailable) {
+            this.sipdateavailable = sipdateavailable;
+        }
+
+        public String getRet7yr() {
+            return ret7yr;
+        }
+
+        public void setRet7yr(String ret7yr) {
+            this.ret7yr = ret7yr;
+        }
+
+        public String getRet5yr() {
+            return ret5yr;
+        }
+
+        public void setRet5yr(String ret5yr) {
+            this.ret5yr = ret5yr;
+        }
+
+        public String getRet3yr() {
+            return ret3yr;
+        }
+
+        public void setRet3yr(String ret3yr) {
+            this.ret3yr = ret3yr;
+        }
+
+        public String getRet1yr() {
+            return ret1yr;
+        }
+
+        public void setRet1yr(String ret1yr) {
+            this.ret1yr = ret1yr;
+        }
+
+        public String getRet10yr() {
+            return ret10yr;
+        }
+
+        public void setRet10yr(String ret10yr) {
+            this.ret10yr = ret10yr;
+        }
+
+        public String getRating() {
+            return rating;
+        }
+
+        public void setRating(String rating) {
+            this.rating = rating;
+        }
+
+        public String getPercentage() {
+            return percentage;
+        }
+
+        public void setPercentage(String percentage) {
+            this.percentage = percentage;
+        }
+
+        public String getMinsipmonths() {
+            return minsipmonths;
+        }
+
+        public void setMinsipmonths(String minsipmonths) {
+            this.minsipmonths = minsipmonths;
+        }
+
+        public String getMinsipamt() {
+            return minsipamt;
+        }
+
+        public void setMinsipamt(String minsipamt) {
+            this.minsipamt = minsipamt;
+        }
+
+        public String getMininvestmentmultiple() {
+            return mininvestmentmultiple;
+        }
+
+        public void setMininvestmentmultiple(String mininvestmentmultiple) {
+            this.mininvestmentmultiple = mininvestmentmultiple;
+        }
+
+        public String getMininitialinvestmentamt() {
+            return mininitialinvestmentamt;
+        }
+
+        public void setMininitialinvestmentamt(String mininitialinvestmentamt) {
+            this.mininitialinvestmentamt = mininitialinvestmentamt;
+        }
+
+        public String getMinaddoninvestmentamt() {
+            return minaddoninvestmentamt;
+        }
+
+        public void setMinaddoninvestmentamt(String minaddoninvestmentamt) {
+            this.minaddoninvestmentamt = minaddoninvestmentamt;
+        }
+
+        public String getLink() {
+            return link;
+        }
+
+        public void setLink(String link) {
+            this.link = link;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getGwallowsip() {
+            return gwallowsip;
+        }
+
+        public void setGwallowsip(String gwallowsip) {
+            this.gwallowsip = gwallowsip;
+        }
+
+        public String getGwallowonetime() {
+            return gwallowonetime;
+        }
+
+        public void setGwallowonetime(String gwallowonetime) {
+            this.gwallowonetime = gwallowonetime;
+        }
+
+        public String getFundname() {
+            return fundname;
+        }
+
+        public void setFundname(String fundname) {
+            this.fundname = fundname;
+        }
+
+        public String getAmount() {
+            return amount;
+        }
+
+        public void setAmount(String amount) {
+            this.amount = amount;
+        }
+    }
+
     public  static  class Projection{
         private String p50;
 

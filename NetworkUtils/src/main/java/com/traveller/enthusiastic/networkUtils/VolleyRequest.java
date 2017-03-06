@@ -17,6 +17,7 @@ import com.traveller.enthusiastic.appUtill.ASCIILOG;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -56,14 +57,17 @@ public abstract class VolleyRequest<Req, Res extends ValueObject> extends Reques
             this.mUrl = GETQueryBuilder.prepareURL(url, requestBody);
         }
 
-        if (method != Method.GET) {
-            mRequestBody = requestBody != null ? APIUtils.createJsonFromModel(requestBody) : null;
-        }
-
+        //if(method==Method.POST){
+          //  mRequestBody = mRequest.toString();
+        //}else {
+            if (method != Method.GET) {
+                mRequestBody = requestBody != null ? APIUtils.createParamBody(requestBody) : null;
+            }
+      //  }
         if (tag != null) {
             this.setTag(tag);
         }
-        ASCIILOG.d("SDVolleyRequest mRequestBody " + mRequestBody + "  url " + mUrl );
+        ASCIILOG.d("VolleyRequest mRequestBody " + mRequestBody + "  url " + mUrl );
 
         DefaultRetryPolicy retryPolicy = new DefaultRetryPolicy(60000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
@@ -124,14 +128,16 @@ public abstract class VolleyRequest<Req, Res extends ValueObject> extends Reques
 
     @Override
     protected Response<Res> parseNetworkResponse(NetworkResponse response) {
-
+        ObjectMapper objectMapper = ObjectMapperSingleton.getInstance().getJacksonObjectMapper();
+        objectMapper.configure(JsonParser.Feature.AUTO_CLOSE_SOURCE, true);
         try {
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
 
 
-            json = processResponse(mUrl, json);
+            if(!TextUtils.isEmpty(json)){
+            json = processResponse(mUrl, json);}
 
-            ObjectMapper objectMapper = ObjectMapperSingleton.getInstance().getJacksonObjectMapper();
+
 
             Res readValue = objectMapper.readValue(json, mResClass);
 
@@ -141,7 +147,7 @@ public abstract class VolleyRequest<Req, Res extends ValueObject> extends Reques
                 Cache.Entry entry = null;
                 long responseTime = System.currentTimeMillis();
                 boolean isCacheResponse = false;
-                if(shouldCacheResponse() && readValue.isSuccessful()){
+                if(shouldCacheResponse() && readValue.getSuccess()){
                     if(response.headers.containsKey(Volley.HEADER_CACHE_RESPONSE_TIME)){
                         responseTime = Long.parseLong(response.headers.get(Volley.HEADER_CACHE_RESPONSE_TIME));
                         isCacheResponse = true;
@@ -218,7 +224,7 @@ public abstract class VolleyRequest<Req, Res extends ValueObject> extends Reques
     }
 
     public String getBodyContentType() {
-        return PROTOCOL_JSON_CONTENT_TYPE;
+        return PROTOCOL_FORM_CONTENT_TYPE;
     }
 
     public byte[] getBody() {
@@ -304,5 +310,6 @@ public abstract class VolleyRequest<Req, Res extends ValueObject> extends Reques
     public Object getRequestTag() {
         return getTag();
     }
+
 }
 

@@ -1,5 +1,7 @@
 package com.traveller.enthusiastic.networkUtils;
 
+import android.text.TextUtils;
+
 import java.io.Serializable;
 
 /**
@@ -13,7 +15,20 @@ public  abstract class ValueObject extends SimpleObservable<ValueObject> impleme
 
         protected String errorCode;
 
-        protected String errorMessage;
+    protected String success;
+
+    public boolean getSuccess() {
+        if(!TextUtils.isEmpty(success))
+            return true;
+        else return false;
+       // return success;
+    }
+
+    public void setSuccess(String success) {
+        this.success = success;
+    }
+
+    protected String errorMessage;
 
         private long mResponseTime;
 

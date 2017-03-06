@@ -3,6 +3,7 @@ package com.traveller.enthusiastic.goldwise.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +58,9 @@ public class OverViewProjectionFragment extends Fragment  {
             badCase_tv.setText(Utility.getFormatedAmount(getContext(), "123456"));
             goodCase_tv.setText(Utility.getFormatedAmount(getContext(), "5656"));
             totalInvestments_tv.setText(Utility.getFormatedAmount(getContext(), response.getMsg().getTotal_investment()+""));
-            projectedAmount_tv.setText(Utility.getFormatedAmount(getContext(), response.getMsg().getProjections().getP75()));
+            String [] projection = response.getMsg().getProjections().getP75().split(";");
+            String projSplit = (!TextUtils.isEmpty(projection[1]))?projection[1]:"90897";
+            projectedAmount_tv.setText(Utility.getFormatedAmount(getContext(), projSplit));
 
         }else {
             badCase_tv.setText(Utility.getFormatedAmount(getContext(), "123456"));

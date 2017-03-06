@@ -33,6 +33,7 @@ public class ProjectionPagerAdaptor extends FragmentStatePagerAdapter {
         public Fragment getItem(int position) {
             OverViewProjectionFragment fragment = new OverViewProjectionFragment();
             fragment.getHeignt();
+            fragment.setResponse(response);
             return fragment;
         }
 

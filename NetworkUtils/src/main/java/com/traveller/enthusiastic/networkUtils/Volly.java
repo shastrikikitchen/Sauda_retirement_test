@@ -4,15 +4,31 @@ import android.app.Application;
 import android.content.Context;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.traveller.enthusiastic.appUtill.ASCIILOG;
+import com.traveller.enthusiastic.networkUtils.SSL.SDHurlStack;
+import com.traveller.enthusiastic.utils.R;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyManagementException;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateExpiredException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.CertificateNotYetValidException;
+import java.security.cert.X509Certificate;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
+import javax.security.cert.CertificateException;
 
 /**
  * Created by sauda on 14/02/17.
@@ -26,7 +42,7 @@ public class Volly {
         private static RequestQueue mGatewayAuthQueue;
         private static RequestQueue mGatewayQueue;
 
-        private static char[] KEYSTORE_PASSWORD = "snapdealseller123".toCharArray();
+        private static char[] KEYSTORE_PASSWORD = "qwerty".toCharArray();
         private static String hostName;
         private static ImageLoader imageLoader;
 
@@ -43,16 +59,19 @@ public class Volly {
          *
          * @param app Application instance.
          */
-        public static void init(Application app, String email) {
+        public static void init(Application app, String email) throws CertificateException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException, java.security.cert.CertificateException, IOException {
 
 
-            ASCIILOG.d("init SDVolley request manager");
+            ASCIILOG.d("init Volley request manager");
             appContext = app;
-            hostName = /*APIUtils.getHostName();*/ "stage";
+            hostName = /*APIUtils.getHostName();*/ "ec2-52-220-95-9.ap-southeast-1.compute.amazonaws.com";
 
             mImageRequestQueue = Volley.newRequestQueue(app, email);
-            mRequestQueue = Volley.newRequestQueue(app, email);
+            //mRequestQueue = Volley.newRequestQueue(app, email);
             mGatewayQueue = Volley.newRequestQueue(app, email);
+            SSLSocketFactory sslSocketFactory = getSSLSocketFactory_Certificate("BKS", R.raw.sslcert);
+
+            mRequestQueue = Volley.newRequestQueue(appContext.getApplicationContext(),  new SDHurlStack("ec2-52-220-95-9.ap-southeast-1.compute.amazonaws.com", sslSocketFactory));
 
             mGatewayAuthQueue = Volley.newRequestQueue(app.getApplicationContext(), email);
             mLoginRequestQueue = Volley.newRequestQueue(app.getApplicationContext(),email);
@@ -62,6 +81,7 @@ public class Volly {
             RequestLifecycleManager.getInstance().init(app);
 
         }
+
 
 
         public static ImageLoader getImageLoader() {
@@ -134,6 +154,91 @@ public class Volly {
             RequestLifecycleManager.getInstance().clearAllRequests();
         }
 
+
+    private static TrustManager[] getWrappedTrustManagers(TrustManager[] trustManagers) {
+        final X509TrustManager originalTrustManager = (X509TrustManager) trustManagers[0];
+        return new TrustManager[]{
+                new X509TrustManager() {
+                    public X509Certificate[] getAcceptedIssuers() {
+                        return originalTrustManager.getAcceptedIssuers();
+                    }
+
+                    public void checkClientTrusted(X509Certificate[] certs, String authType) throws java.security.cert.CertificateException {
+                        if (certs != null && certs.length > 0){
+                            certs[0].checkValidity();
+                        } else {
+                            originalTrustManager.checkClientTrusted(certs, authType);
+                        }
+                    }
+
+                    public void checkServerTrusted(X509Certificate[] certs, String authType) throws java.security.cert.CertificateException {
+                        if (certs != null && certs.length > 0){
+                            certs[0].checkValidity();
+                        } else {
+                            originalTrustManager.checkServerTrusted(certs, authType);
+                        }
+                    }
+                }
+        };
+    }
+
+    private static SSLSocketFactory getSSLSocketFactory_Certificate(String keyStoreType, int keystoreResId)
+            throws CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException, KeyManagementException, java.security.cert.CertificateException {
+
+        CertificateFactory cf = CertificateFactory.getInstance("X.509");
+        InputStream caInput = appContext.getApplicationContext().getResources().openRawResource(keystoreResId);
+
+        Certificate ca = cf.generateCertificate(caInput);
+        caInput.close();
+
+        if (keyStoreType == null || keyStoreType.length() == 0) {
+            keyStoreType = KeyStore.getDefaultType();
+        }
+        KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+        keyStore.load(null, null);
+        keyStore.setCertificateEntry("ca", ca);
+
+        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+        TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+        tmf.init(keyStore);
+
+        TrustManager[] wrappedTrustManagers = getWrappedTrustManagers(tmf.getTrustManagers());
+
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(null, wrappedTrustManagers, null);
+
+        return sslContext.getSocketFactory();
+    }
+
+    private SSLSocketFactory getSSLSocketFactory_KeyStore(String keyStoreType, int keystoreResId, String keyPassword)
+            throws CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException, KeyManagementException, java.security.cert.CertificateException {
+
+        InputStream caInput = appContext.getApplicationContext().getResources().openRawResource(keystoreResId);
+
+        // creating a KeyStore containing trusted CAs
+
+        if (keyStoreType == null || keyStoreType.length() == 0) {
+            keyStoreType = KeyStore.getDefaultType();
+        }
+        KeyStore keyStore = KeyStore.getInstance(keyStoreType);
+
+        keyStore.load(caInput, keyPassword.toCharArray());
+
+        // creating a TrustManager that trusts the CAs in the KeyStore
+
+        String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
+        TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);
+        tmf.init(keyStore);
+
+        TrustManager[] wrappedTrustManagers = getWrappedTrustManagers(tmf.getTrustManagers());
+
+        SSLContext sslContext = SSLContext.getInstance("TLS");
+        sslContext.init(null, wrappedTrustManagers, null);
+
+        return sslContext.getSocketFactory();
+    }
+
+
         private static SSLSocketFactory newSslSocketFactory() {
             try {
                 // Get an instance of the Bouncy Castle KeyStore format
@@ -142,14 +247,14 @@ public class Volly {
                 // your trusted certificates (root and any intermediate certs)
 
                 /*TODO:  check the raw file later*/
-                /*InputStream in = appContext.getApplicationContext().getResources().openRawResource(R.raw.clientkeystore);
+                InputStream in = appContext.getApplicationContext().getResources().openRawResource(R.raw.ssl);
                 try {
                     // Initialize the keystore with the provided trusted certificates
                     // Provide the password of the keystore
                     trusted.load(in, KEYSTORE_PASSWORD);
                 } finally {
                     in.close();
-                }*/
+                }
 
                 String tmfAlgorithm = TrustManagerFactory.getDefaultAlgorithm();
                 TrustManagerFactory tmf = TrustManagerFactory.getInstance(tmfAlgorithm);

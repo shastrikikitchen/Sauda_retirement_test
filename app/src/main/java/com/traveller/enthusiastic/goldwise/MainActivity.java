@@ -7,9 +7,17 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.android.volley.NukeSSLCerts;
 import com.traveller.enthusiastic.goldwise.helper.NavigationHelper;
 import com.traveller.enthusiastic.goldwise.helper.Utility;
 import com.traveller.enthusiastic.networkUtils.Volly;
+
+import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.security.cert.CertificateException;
 
 public  class MainActivity extends AppCompatActivity {
     Toolbar myToolbar;
@@ -19,7 +27,24 @@ public  class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        Volly.init(getApplication(),"saudasadaf@gmail.com");
+       // new NukeSSLCerts().nuke();
+        try {
+            Volly.init(getApplication(),"saudasadaf@gmail.com");
+        } catch (CertificateException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (KeyStoreException e) {
+            e.printStackTrace();
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        } catch (java.security.cert.CertificateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //  new NukeSSLCerts().nuke();
+
 
     }
     protected void init() {

@@ -19,4 +19,13 @@
         <item>OVERVIEW</item>
         <item>FUNDS</item>
     </string-array>
+    <string-array name="graph_day_filter_array">
+        <item name="seven_days">Select Years</item>
+
+        <item name="seven_days">1 Years </item>
+        <item name="fifteen_days">2 Years</item>
+        <item name="thirty_days">3 Years</item>
+        <item name="ninety_days">4 Years</item>
+
+    </string-array>
 </resources>

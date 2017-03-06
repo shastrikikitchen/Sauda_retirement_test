@@ -9,13 +9,16 @@ import com.traveller.enthusiastic.networkUtils.VolleyRequest;
 
 import java.util.Map;
 
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
+
 /**
  * Created by sauda on 25/02/17.
  */
 
-public class GoalWiseAPi extends VolleyRequest<GoalWiseRequest,GoalWiseResponse> {
-    public GoalWiseAPi(GoalWiseRequest requestBody, VolleyListener<GoalWiseResponse> listener, Object tag) {
-        super(Method.POST, "https://ec2-52-220-95-9.ap-southeast-1.compute.amazonaws.com/api/goal-plan", requestBody, GoalWiseResponse.class, listener, tag);
+public class GoalWiseAPi extends VolleyRequest<RequestBody,GoalWiseResponse> {
+    public GoalWiseAPi(RequestBody requestBody, VolleyListener<GoalWiseResponse> listener, Object tag) {
+        super(Method.POST, "https://ec2-52-220-95-9.ap-southeast-1.compute.amazonaws.com/api/goal-plan",requestBody , GoalWiseResponse.class, listener, tag);
        // super(Method.POST, "http://www.json-generator.com/api/json/get/bPWTzgyJFe?indent=2", requestBody, GoalWiseResponse.class, listener, tag);
     }
 
@@ -75,7 +78,15 @@ public class GoalWiseAPi extends VolleyRequest<GoalWiseRequest,GoalWiseResponse>
             request.setRisk_cat(risk_cat);
             request.setTime_horizon(time_horizon);
             request.setAccess_token("YXcxNEFDTU4IAUN.cDUcOQYbZQwsLBgbMwQCYwIwfRomFERrEHU3Dw");
-            return new GoalWiseAPi(request,listener,tag);
+            RequestBody requestBody = new FormBody.Builder()
+                    .add("access_token","YXcxNEFDTU4IAUN.cDUcOQYbZQwsLBgbMwQCYwIwfRomFERrEHU3Dw")
+                    .add("goal","wealth")
+                    .add("time_horizon","1")
+                    .add("risk_cat","2")
+                    .add("monthly_inv","10000")
+                    .build();
+
+            return new GoalWiseAPi(requestBody,listener,tag);
         }
     }
 

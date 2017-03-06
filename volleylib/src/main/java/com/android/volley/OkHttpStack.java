@@ -56,6 +56,8 @@ public class OkHttpStack  implements HttpStack  {
                 throws IOException, AuthFailureError {
 
 
+           // HttpsTrustManager.allowAllSSL();
+
             OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
 
             if(ASCIILOG.isLogEnabled()){
@@ -188,6 +190,7 @@ public class OkHttpStack  implements HttpStack  {
 
             return RequestBody.create(MediaType.parse(r.getBodyContentType()), body);
         }
+
     }
 
 
